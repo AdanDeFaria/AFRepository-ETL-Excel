@@ -8,11 +8,14 @@ import ast
 from classes.data_base import data_base
 from classes.functions import funcoes
 
+#Classes
 DB = data_base()
 FC = funcoes()
 
+#Variavel da Lista com as Respostas
 json_respostas = []
 
+#Local dos Arquivos
 local_destino = [
     os.path.join('src', 'utils', 'authors.csv'),
     os.path.join('src', 'utils', 'categories.csv'),
@@ -21,13 +24,18 @@ local_destino = [
     os.path.join('src', 'utils', 'formats.csv'),
 ]
 
+#Criando os DataFrames
 df_authors = DB.lendo_arquivo_csv(local_destino[0])
 df_categories = DB.lendo_arquivo_csv(local_destino[1])
 df_dataset = DB.lendo_arquivo_csv(local_destino[2])
 df_formats = DB.lendo_arquivo_csv(local_destino[4])
 
+#Formatação ou Correções:
+
+#DataFrame dos Autores:
 df_authors['author_name'] = df_authors['author_name'].replace(np.nan, '', regex=True)
 
+#DataFrame do Dataset:
 colunas_manter_dataset = [
     'id',
     'title',
@@ -69,53 +77,52 @@ df_dataset.rename(
 
 df_dataset = df_dataset.drop_duplicates(subset=['id'])
 
-print(df_dataset)
-print(df_dataset.info())
+#print(df_dataset)
+#print(df_dataset.info())
 
+#Gerando as Respostas:
+
+#Reposta 1:
 df_dataset = FC.contagem_livros(df_dataset, json_respostas)
 
+#Reposta 2:
 FC.contagem_livros_um_autor(df_dataset, json_respostas)
 
+#Reposta 3:
 df_dataset_dp = df_dataset.explode('author_id')
 
 df_dataset_au_dp = DB.join_pandas(df_dataset_dp, df_authors, "author_id", "inner")
 
 FC.listar_5_autores_com_mais_livros(df_dataset_au_dp, json_respostas)
 
-#json_dataset_ft = DB.dataframe_para_json(df_dataset)
-
-#json_authors = DB.dataframe_para_json(df_authors)
-
-#print(json_authors)
-
-#json_dataset_ft_au = DB.join_json(json_dataset_ft, json_authors, "author_id", "left_json_a_campo_lista_com_dup")
-
-#print(json_dataset_ft_au)
-
-#df_dataset_au = pd.json_normalize(json_dataset_ft_au)
-
-#print(df_dataset_au.head(2))
-
+#Reposta 4:
 df_dataset_dp = df_dataset.explode('category_id')
 
 df_dataset_ct_dp = DB.join_pandas(df_dataset_dp, df_categories, "category_id", "inner")
 
 FC.contagem_livros_por_categoria(df_dataset_ct_dp, json_respostas)
 
+#Reposta 5:
 FC.listar_as_5_categorias_com_mais_livros(df_dataset_ct_dp, json_respostas)
 
 df_dataset_ft = DB.join_pandas(df_dataset, df_formats, "format_id", "inner")
 
+#Reposta 6:
 FC.formato_com_maior_quantidade_livros(df_dataset_ft, json_respostas)
 
+#Reposta 7:
 FC.listar_livros_no_top_10_de_bestsellers(df_dataset, json_respostas)
 
+#Reposta 8:
 FC.listar_livros_no_top_10_de_ratting_avg(df_dataset, json_respostas)
 
+#Reposta 9:
 FC.contagem_livros_com_maior_ratting_avg(df_dataset, json_respostas)
 
+#Reposta 10:
 FC.contagem_livros_com_data_maior(df_dataset, json_respostas)
 
+#Gerando o Arquivo de Respostas:
 df_respostas = pd.json_normalize(json_respostas)
 
 DB.criando_arquivo_csv(df_respostas, txt="respostas")

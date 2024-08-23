@@ -1,0 +1,11 @@
+Pergunta;Resposta;TempoExecucao;DataRegistro
+Qual a quantidade total de livros da base?;20216;0 days 00:00:00;2024-08-23 03:25:55.872280
+Qual a quantidade de livros que possui apenas 1 autor?;14753;0 days 00:00:00.015198;2024-08-23 03:25:55.887478
+Quais os 5 autores com a maior quantidade de livros?;Está no Arquivo 'src/utils/listando_e_rankeando_os_5_melhores_autores_por_quantidade_de_livros.csv';0 days 00:00:00.025952;2024-08-23 03:25:55.958530
+Qual a quantidade de livros por categoria?;Está no Arquivo 'src/utils/listando_categorias_por_quantidade_de_livros.csv';0 days 00:00:00.018207;2024-08-23 03:25:56.034843
+Quais as 5 categorias com a maior quantidade de livros?;Está no Arquivo 'src/utils/listando_e_rankeando_as_5_melhores_categorias_por_quantidade_de_livros.csv';0 days 00:00:00.017006;2024-08-23 03:25:56.051849
+Qual o formato com a maior quantidade de livros?;Formato com mais livros é Paperback com 13497 livros;0 days 00:00:00.008606;2024-08-23 03:25:56.068787
+Considerando a coluna “bestsellers-rank”, quais os 10 livros mais bem posicionados?;Está no Arquivo 'src/utils/listando_e_rankeando_os_10_melhores_bestsellers.csv';0 days 00:00:00.010011;2024-08-23 03:25:56.079713
+Considerando a coluna “rating-avg”, quais os 10 livros mais bem posicionados?;Está no Arquivo 'src/utils/listando_e_rankeando_os_10_melhores_rating-avg.csv';0 days 00:00:00.008137;2024-08-23 03:25:56.087850
+Quantos livros possuem “rating-avg” maior do que 3,5?;8182;0 days 00:00:00.004997;2024-08-23 03:25:56.093846
+Quantos livros tem data de publicação (publication-date) maior do que 01-01-2020?;1172;0 days 00:00:00.002599;2024-08-23 03:25:56.097445
